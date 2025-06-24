@@ -20,6 +20,7 @@ public class InputManager : MonoBehaviour
     public bool IsRunning() => inputActions.Movement.Run.IsPressed();
     public bool JumpTriggered() => inputActions.Movement.Jump.triggered;
     public Vector2 GetLookInput() => inputActions.Movement.Look.ReadValue<Vector2>();
+    public bool IsAttackPressed() => inputActions.Combat.Attack.WasPressedThisFrame();
 
     private void OnDestroy()
     {

@@ -1,19 +1,30 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
+using System.IO;
 
-public class ConfigManager
+public class ConfigManager : MonoBehaviour
 {
-    private static ConfigManager _instance;
-    public static ConfigManager Instance => _instance ??= new ConfigManager();
+    public static ConfigManager Instance { get; private set; }
 
-    private ConfigManager()
+    private Dictionary<string, string> configCache = new Dictionary<string, string>();
+
+    private void Awake()
     {
-        //Debug.Log($"{} Configs Loaded Successfully!");
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
-    public void GetConfig(string configName)
+    public T LoadConfig<T>(string fileName)
     {
+        if (!configCache.ContainsKey(fileName))
+        {
+            string path = Path.Combine(Application.dataPath, "ArrozResources/FileCfg/", fileName + ".json");
+            if (File.Exists(path))
+                configCache[fileName] = File.ReadAllText(path);
+            else
+                Debug.LogError($"[ConfigManager] Archivo no encontrado: {path}");
+        }
+
+        return JsonUtility.FromJson<T>(configCache[fileName]);
     }
 }

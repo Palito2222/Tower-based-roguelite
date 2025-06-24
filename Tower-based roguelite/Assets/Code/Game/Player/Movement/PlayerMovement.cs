@@ -4,10 +4,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movimiento")]
-    public float walkSpeed = 3.5f;
+    public float walkSpeed = 3f;
     public float runSpeed = 6f;
-    public float gravity = -9.81f;
-    public float jumpHeight = 2f;
+    public float gravity = -14f;
+    public float jumpHeight = 1.6f;
+    public float rotationSpeed = 10f;
 
     [Header("Cámara")]
     public Transform cameraTransform;
@@ -36,14 +37,34 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && velocity.y < 0)
             velocity.y = -2f;
 
+        // 1. Input de movimiento
         Vector2 input = InputManager.Instance.GetMovementInput();
-        Vector3 move = new Vector3(input.x, 0, input.y);
-        move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
-        move.y = 0f;
+        Vector3 inputDir = new Vector3(input.x, 0f, input.y).normalized;
 
-        float speed = InputManager.Instance.IsRunning() ? runSpeed : walkSpeed;
-        controller.Move(move * speed * Time.deltaTime);
+        if (inputDir.magnitude >= 0.1f)
+        {
+            // 2. Convertir input relativo a la cámara
+            Vector3 camForward = cameraTransform.forward;
+            Vector3 camRight = cameraTransform.right;
 
+            camForward.y = 0;
+            camRight.y = 0;
+            camForward.Normalize();
+            camRight.Normalize();
+
+            Vector3 moveDir = camForward * inputDir.z + camRight * inputDir.x;
+            moveDir.Normalize();
+
+            // 3. Movimiento
+            float speed = InputManager.Instance.IsRunning() ? runSpeed : walkSpeed;
+            controller.Move(moveDir * speed * Time.deltaTime);
+
+            // 4. Rotación suave del personaje hacia la dirección
+            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+
+        // 5. Salto
         if (isGrounded && InputManager.Instance.JumpTriggered())
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
