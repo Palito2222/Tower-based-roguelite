@@ -38,5 +38,10 @@ namespace Game.Player.Combat
                 currentComboIndex = 0;
             }
         }
+
+        public void SetCombo(ComboData combo)
+        {
+            comboData = combo;
+        }
     }
 }

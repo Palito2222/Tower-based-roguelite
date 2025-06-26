@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: TestCombo
   m_EditorClassIdentifier: 
   comboSteps:
-  - attack: {fileID: 0}
+  - attack: {fileID: 11400000, guid: 75170469dc5b7524985fc64a1057b41f, type: 2}
+    comboWindow: 0.5
+  - attack: {fileID: 11400000, guid: ad986fab2447ecf4e94d5c5fc4484e01, type: 2}
     comboWindow: 0.5

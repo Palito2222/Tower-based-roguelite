@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a177caf12c93c544587a890d98ef39bf, type: 3}
   m_Name: TestAttack_1
   m_EditorClassIdentifier: 
-  attackName: 
-  damage: 0
-  cooldown: 0
-  range: 0
+  attackName: Test 1
+  damage: 4
+  cooldown: 0.3
+  range: 3
