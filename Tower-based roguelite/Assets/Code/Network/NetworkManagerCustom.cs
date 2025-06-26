@@ -1,18 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
+using FishNet.Managing;
 using UnityEngine;
 
 public class NetworkManagerCustom : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private NetworkManager net;
+
+    private void Awake()
     {
-        
+        net = FindObjectOfType<NetworkManager>();
+        StartHost();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartHost()
     {
-        
+        net.ServerManager.StartConnection();
+        net.ClientManager.StartConnection();
+    }
+
+    public void StartClient()
+    {
+        net.ClientManager.StartConnection();
+    }
+
+    public void StartServerOnly()
+    {
+        net.ServerManager.StartConnection();
     }
 }
