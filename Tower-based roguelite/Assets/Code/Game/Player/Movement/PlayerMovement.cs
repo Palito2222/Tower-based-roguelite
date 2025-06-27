@@ -1,16 +1,17 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movimiento")]
+    [Title("Movement")]
     public float walkSpeed = 3f;
     public float runSpeed = 6f;
     public float gravity = -14f;
     public float jumpHeight = 1.6f;
     public float rotationSpeed = 10f;
 
-    [Header("Cámara")]
+    [Title("Camera")]
     public Transform cameraTransform;
 
     private CharacterController controller;

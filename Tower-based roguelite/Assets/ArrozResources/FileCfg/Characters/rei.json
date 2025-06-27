@@ -1,8 +1,0 @@
-{
-  "id": 1003,
-  "displayName": "Rei",
-  "maxHealth": 100,
-  "moveSpeed": 6.0,
-  "comboId": "kaoru_basic_combo",
-  "abilityIds": ["kaoru_fireball", "kaoru_barrier", "kaoru_dash"]
-}

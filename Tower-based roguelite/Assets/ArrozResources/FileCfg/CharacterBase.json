@@ -1,0 +1,20 @@
+[
+  {
+    "characterID": 1001,
+    "name": "Kaoru",
+    "description": "Kaoru es una elfa de voz suave y mirada distante. Su magia fluye a través de notas que solo algunos pueden oír, entretejiendo armonías que sanan o confunden según el compás. Aunque su papel parece menor, su presencia deja una huella difícil de olvidar.",
+    "defaultSkillIDs": [100101, 100102, 100103],
+    "unlockableSkillIDs": [200101, 200102, 200103],
+    "element": "Fantasy",
+    "role": "Support"
+  },
+  {
+    "characterID": 1002,
+    "name": "Ryota",
+    "description": "Un exorcista melancólico que juega con fuego literal y emocional...",
+    "defaultSkillIDs": [100201, 100202, 100203],
+    "unlockableSkillIDs": [200201, 200202],
+    "element": "Fire",
+    "role": "DPS"
+  }
+]

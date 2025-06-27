@@ -1,9 +1,12 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Player.Combat
 {
     public class PlayerCombatController : MonoBehaviour
     {
+        [Title("Combo Data")]
+        [SerializeField]
         public ComboData comboData;
         private int currentComboIndex = 0;
         private float lastAttackTime;
