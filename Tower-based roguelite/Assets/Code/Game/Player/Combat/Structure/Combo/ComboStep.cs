@@ -1,6 +1,7 @@
 [System.Serializable]
 public class ComboStep
 {
-    public BaseAttack attack;
-    public float comboWindow = 0.5f; // Tiempo para encadenar
+    public AttackAction attack;
+    public float comboWindow =>
+        ConfigManager.Instance.GetByID<SkillInfo>(attack.skillID)?.comboWindow ?? 1.0f;
 }
