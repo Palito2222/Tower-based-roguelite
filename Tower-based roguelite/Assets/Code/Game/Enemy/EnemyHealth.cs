@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour, IHittable
 {
-    public float maxHealth = 50f;
+    public float maxHealth = 100f;
     private float currentHealth;
 
     private void Start()
@@ -10,19 +10,23 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float amount)
+    public void ApplyHit(HitContext context)
     {
-        currentHealth -= amount;
-        Debug.Log($"{gameObject.name} tomó {amount} de daño. Vida restante: {currentHealth}");
+        currentHealth -= context.damage;
+        Debug.Log($"{gameObject.name} recibió {context.damage} de daño de {context.attacker.name}");
 
         if (currentHealth <= 0)
-        {
             Die();
-        }
+    }
+
+    public void ApplyEffect(string effectId)
+    {
+        Debug.Log($"Aplicando efecto: {effectId}");
     }
 
     private void Die()
     {
+        Debug.Log($"{gameObject.name} ha muerto.");
         Destroy(gameObject);
     }
 }

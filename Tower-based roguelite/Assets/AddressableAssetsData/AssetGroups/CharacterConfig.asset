@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: ca6b434ea07ca774da17fe1557ff8683
   m_SerializeEntries:
+  - m_GUID: 4a98fb5b3f060b84fbdef68dfbf9a1bd
+    m_Address: Assets/ArrozResources/FileCfg/CharacterAbilityConfig.json
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CharacterConfig
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e17b5d6fb1ea14a49ae1d3c0e304f7f7
     m_Address: Assets/ArrozResources/FileCfg/CharacterBase.json
     m_ReadOnly: 0
