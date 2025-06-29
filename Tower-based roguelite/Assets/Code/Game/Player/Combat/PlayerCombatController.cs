@@ -8,10 +8,11 @@ namespace Game.Player.Combat
         [Title("Combo Data")]
         [SerializeField]
         public ComboData comboData;
+
         private int currentComboIndex = 0;
         private float lastAttackTime;
 
-        public Transform attackOrigin; // Empty object delante del jugador
+        public Transform attackOrigin;
 
         void Update()
         {
@@ -28,12 +29,10 @@ namespace Game.Player.Combat
 
             if (timeSinceLast <= step.comboWindow || currentComboIndex == 0)
             {
-                step.attack.Execute(attackOrigin, gameObject);
+                step.Execute(attackOrigin, gameObject);
                 lastAttackTime = Time.time;
 
-                currentComboIndex++;
-                if (currentComboIndex >= comboData.comboSteps.Count)
-                    currentComboIndex = 0;
+                currentComboIndex = (currentComboIndex + 1) % comboData.comboSteps.Count;
             }
             else
             {
@@ -45,6 +44,7 @@ namespace Game.Player.Combat
         public void SetCombo(ComboData combo)
         {
             comboData = combo;
+            comboData?.Initialize();
         }
     }
 }

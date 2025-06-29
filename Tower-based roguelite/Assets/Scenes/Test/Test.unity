@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd956df5085b104a829738393004d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initializer: {fileID: 403475056}
+  combatController: {fileID: 403475055}
 --- !u!4 &28481466
 Transform:
   m_ObjectHideFlags: 0
@@ -494,7 +494,6 @@ GameObject:
   - component: {fileID: 403475052}
   - component: {fileID: 403475051}
   - component: {fileID: 403475055}
-  - component: {fileID: 403475056}
   - component: {fileID: 403475054}
   m_Layer: 0
   m_Name: Player
@@ -591,19 +590,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comboData: {fileID: 11400000, guid: f545c64e1e5b75d4a8ebbab132f1e35c, type: 2}
   attackOrigin: {fileID: 1479173685}
---- !u!114 &403475056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 403475050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f10a2827390f554b8941fb6418885e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  combatController: {fileID: 403475055}
 --- !u!1 &470421677
 GameObject:
   m_ObjectHideFlags: 0

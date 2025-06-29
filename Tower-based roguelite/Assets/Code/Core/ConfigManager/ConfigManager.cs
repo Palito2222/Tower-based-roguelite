@@ -1,65 +1,59 @@
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine.AddressableAssets;
 
 public class ConfigManager : MonoBehaviour
 {
     public static ConfigManager Instance { get; private set; }
 
-    private Dictionary<Type, object> configCache = new();
+    private Dictionary<string, object> _cache = new();
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance != null) Destroy(gameObject);
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    public async void LoadConfigAsync<T>(string address, Action<Dictionary<int, T>> onComplete) where T : IConfigData
+    public async Task<List<T>> GetAllAsync<T>(string adress)
     {
-        Type type = typeof(T);
+        if (_cache.TryGetValue(adress, out var cached))
+            return (List<T>)cached;
 
-        if (configCache.TryGetValue(type, out object cached))
+        string path = $"Assets/ArrozResources/FileCfg/{adress}.json";
+
+        TextAsset jsonAsset = await Addressables.LoadAssetAsync<TextAsset>(path).Task;
+        if (jsonAsset != null)
         {
-            onComplete?.Invoke((Dictionary<int, T>)cached);
-            return;
+            Debug.LogError($"[Config Manager] JSON not found: {path}");
+            return null;
         }
 
-        string fulladress = $"Assets/ArrozResources/FileCfg/{address}.json";
-
-        AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>(fulladress);
-        await handle.Task;
-
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            List<T> list = JsonConvert.DeserializeObject<List<T>>(handle.Result.text);
-            Dictionary<int, T> map = new();
-
-            foreach (var entry in list)
-                map[entry.ID] = entry;
-
-            configCache[type] = map;
-            onComplete?.Invoke(map);
-        }
-        else
-        {
-            Debug.LogError($"[ConfigManager] Error al cargar addressable '{fulladress}'");
-            onComplete?.Invoke(new Dictionary<int, T>());
-        }
+        List<T> result = JsonConvert.DeserializeObject<List<T>>(jsonAsset.text);
+        _cache[path] = result;
+        return result;
     }
 
-    public T GetByID<T>(int id) where T : IConfigData
+    public async Task<T> GetAsync<T>(string address, int id, string fieldName = "skillID") where T : class
     {
-        var type = typeof(T);
-        if (configCache.TryGetValue(type, out object cached))
+        List<T> list = await GetAllAsync<T>(address);
+        if (list == null) return null;
+
+        foreach (T item in list)
         {
-            var dict = (Dictionary<int, T>)cached;
-            return dict.TryGetValue(id, out var result) ? result : default;
+            var field = typeof(T).GetField(fieldName);
+            if (field == null)
+            {
+                Debug.LogError($"[Config Manager] No field '{fieldName}' in {typeof(T).Name}");
+                continue;
+            }
+
+            if ((int)field.GetValue(item) == id )
+                return item;
         }
 
-        Debug.LogWarning($"[ConfigManager] El tipo {type.Name} no está cargado aún.");
-        return default;
+        return null;
     }
 }

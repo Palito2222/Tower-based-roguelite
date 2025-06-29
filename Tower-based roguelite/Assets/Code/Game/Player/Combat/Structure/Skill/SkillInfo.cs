@@ -1,15 +1,15 @@
 using System;
 
 [Serializable]
-public class SkillInfo : IConfigData
+public class SkillInfo
 {
     public int skillID;
     public string skillName;
-    public string description;
-    public float damage;
+    public string skillDesc;
+    public int skillType;
     public float cooldown;
-    public float comboWindow;
-    public string animationName;
-
-    public int ID => skillID;
+    public int maxLevel;
+    public string executorType;
+    public string effectPrefabPath;
+    public string iconPath;
 }

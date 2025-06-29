@@ -1,20 +1,32 @@
+using Game.Player.Combat;
 using UnityEngine;
-using System.Collections.Generic;
 
 public class TestCombatLoader : MonoBehaviour
 {
-    public PlayerCombatInitializer initializer;
+    public PlayerCombatController combatController;
 
-    void Start()
+    async void Start()
     {
-        // Cargar configs primero
-        ConfigManager.Instance.LoadConfigAsync<SkillInfo>("SkillBase", OnSkillsReady);
-    }
+        var kaoru = await ConfigManager.Instance.GetAsync<CharacterInfo>("CharacterBase", 1001);
 
-    void OnSkillsReady(Dictionary<int, SkillInfo> skillMap)
-    {
-        // Simular loadout de Kaoru
-        List<int> kaoruSkills = new() { 100101, 100102, 100103 };
-        initializer.InitializeFromLoadout(kaoruSkills);
+        ComboData combo = ScriptableObject.CreateInstance<ComboData>();
+        combo.comboSteps = new();
+
+        foreach (var skillId in kaoru.defaultSkillIDs)
+        {
+            var step = new ComboStep { skillID = skillId, comboWindow = 0.5f };
+            step.skillInfo = await ConfigManager.Instance.GetAsync<SkillInfo>("SkillInfo", skillId);
+
+            if (step.skillInfo == null)
+            {
+                Debug.LogError($"SkillInfo no encontrada para SkillId: {skillId}");
+                continue;
+            }
+
+            step.executor = SkillExecutorRegistry.GetExecutor(step.skillInfo.executorType);
+            combo.comboSteps.Add(step);
+        }
+
+        combatController.SetCombo(combo);
     }
 }
