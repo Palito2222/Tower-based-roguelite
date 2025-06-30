@@ -1,0 +1,74 @@
+{
+  "id": "Kaoru_BasicSkill",
+  "type": "Basic",
+  "comboSteps": [
+    {
+      "animation": "Slash1",
+      "cooldown": 0.5,
+      "actions": [
+        {
+          "type": "PlayVFX",
+          "vfx": "Slash1"
+        },
+        {
+          "type": "Hit",
+          "timing": "OnHit1",
+          "damage": 50,
+          "shape": "Box",
+          "width": 3.0,
+          "height": 1.0,
+          "depth": 3.0,
+          "offsetX": 0,
+          "offsetY": 0.5,
+          "offsetZ": 1
+        }
+      ]
+    },
+    {
+      "animation": "Kick1",
+      "cooldown": 0.0,
+      "actions": [
+        {
+          "type": "PlayVFX",
+          "vfx": "Slash1"
+        },
+        {
+          "type": "Hit",
+          "timing": "OnHit1",
+          "damage": 5,
+          "shape": "Box",
+          "width": 2.0,
+          "height": 1.0,
+          "depth": 3.0,
+          "offsetX": 0,
+          "offsetY": 0,
+          "offsetZ": 1.5
+        },
+        {
+          "type": "Hit",
+          "timing": "OnHit2",
+          "damage": 5,
+          "shape": "Box",
+          "width": 2.0,
+          "height": 1.0,
+          "depth": 3.0,
+          "offsetX": 0,
+          "offsetY": 0,
+          "offsetZ": 1.5
+        },
+        {
+          "type": "Hit",
+          "timing": "OnHit3",
+          "damage": 5,
+          "shape": "Box",
+          "width": 2.0,
+          "height": 1.0,
+          "depth": 3.0,
+          "offsetX": 0,
+          "offsetY": 0,
+          "offsetZ": 1.5
+        }
+      ]
+    }
+  ]
+}

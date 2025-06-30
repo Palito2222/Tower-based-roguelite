@@ -6,6 +6,6 @@
     "Element": "Fantasy",
     "Role": "Support",
     "Prefab": "",
-    "UnlockableSkillIDs": []
+    "UnlockableSkillIDs": [1000100101]
   }
 ]

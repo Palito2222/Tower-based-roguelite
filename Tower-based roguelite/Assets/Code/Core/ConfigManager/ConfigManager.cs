@@ -1,59 +1,61 @@
-using UnityEngine;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
+using Newtonsoft.Json;
 using UnityEngine.AddressableAssets;
 
-public class ConfigManager : MonoBehaviour
+public static class ConfigManager
 {
-    public static ConfigManager Instance { get; private set; }
+    private static Dictionary<string, object> cache = new();
 
-    private Dictionary<string, object> _cache = new();
-
-    private void Awake()
+    /// <summary>
+    /// Carga un archivo JSON de lista (ej: CharacterBase, SkillConfig, etc.)
+    /// </summary>
+    public static async Task<List<T>> LoadListAsync<T>(string address)
     {
-        if (Instance != null) Destroy(gameObject);
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+        if (cache.TryGetValue(address, out var cached) && cached is List<T> list)
+            return list;
 
-    public async Task<List<T>> GetAllAsync<T>(string adress)
-    {
-        if (_cache.TryGetValue(adress, out var cached))
-            return (List<T>)cached;
+        var handle = Addressables.LoadAssetAsync<TextAsset>(address);
+        await handle.Task;
 
-        string path = $"Assets/ArrozResources/FileCfg/{adress}.json";
-
-        TextAsset jsonAsset = await Addressables.LoadAssetAsync<TextAsset>(path).Task;
-        if (jsonAsset != null)
+        if (handle.Status != UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
         {
-            Debug.LogError($"[Config Manager] JSON not found: {path}");
-            return null;
+            Debug.LogError($"[ConfigManager] Error cargando lista desde: {address}");
+            return new List<T>();
         }
 
-        List<T> result = JsonConvert.DeserializeObject<List<T>>(jsonAsset.text);
-        _cache[path] = result;
+        var json = handle.Result.text;
+        var result = JsonConvert.DeserializeObject<List<T>>(json);
+        cache[address] = result;
         return result;
     }
 
-    public async Task<T> GetAsync<T>(string address, int id, string fieldName = "skillID") where T : class
+    /// <summary>
+    /// Carga un archivo JSON simple (objeto único, como una habilidad individual)
+    /// </summary>
+    public static async Task<T> LoadAsync<T>(string address)
     {
-        List<T> list = await GetAllAsync<T>(address);
-        if (list == null) return null;
+        if (cache.TryGetValue(address, out var cached) && cached is T obj)
+            return obj;
 
-        foreach (T item in list)
+        var handle = Addressables.LoadAssetAsync<TextAsset>(address);
+        await handle.Task;
+
+        if (handle.Status != UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
         {
-            var field = typeof(T).GetField(fieldName);
-            if (field == null)
-            {
-                Debug.LogError($"[Config Manager] No field '{fieldName}' in {typeof(T).Name}");
-                continue;
-            }
-
-            if ((int)field.GetValue(item) == id )
-                return item;
+            Debug.LogError($"[ConfigManager] Error cargando archivo: {address}");
+            return default;
         }
 
-        return null;
+        var json = handle.Result.text;
+        var result = JsonConvert.DeserializeObject<T>(json);
+        cache[address] = result;
+        return result;
     }
+
+    /// <summary>
+    /// Borra el caché si quieres forzar recarga
+    /// </summary>
+    public static void ClearCache() => cache.Clear();
 }
