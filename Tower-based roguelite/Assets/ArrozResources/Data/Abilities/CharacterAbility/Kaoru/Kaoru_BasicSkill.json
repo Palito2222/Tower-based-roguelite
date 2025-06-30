@@ -15,9 +15,12 @@
           "timing": "OnHit1",
           "damage": 50,
           "shape": "Box",
-          "range": 2.0,
-          "width": 1.0,
-          "origin": "Weapon"
+          "width": 3.0,
+          "height": 1.0,
+          "depth": 3.0,
+          "offsetX": 0,
+          "offsetY": 0.5,
+          "offsetZ": 1
         }
       ]
     },
@@ -34,36 +37,36 @@
           "timing": "OnHit1",
           "damage": 5,
           "shape": "Box",
-          "range": 2.0,
           "width": 2.0,
-          "origin": "Weapon"
+          "height": 1.0,
+          "depth": 3.0,
+          "offsetX": 0,
+          "offsetY": 0,
+          "offsetZ": 1.5
         },
         {
           "type": "Hit",
           "timing": "OnHit2",
           "damage": 5,
           "shape": "Box",
-          "range": 2.0,
           "width": 2.0,
-          "origin": "Weapon"
+          "height": 1.0,
+          "depth": 3.0,
+          "offsetX": 0,
+          "offsetY": 0,
+          "offsetZ": 1.5
         },
         {
           "type": "Hit",
           "timing": "OnHit3",
           "damage": 5,
           "shape": "Box",
-          "range": 2.0,
           "width": 2.0,
-          "origin": "Weapon"
-        },
-        {
-          "type": "Hit",
-          "timing": "OnHit4",
-          "damage": 5,
-          "shape": "Box",
-          "range": 2.0,
-          "width": 2.0,
-          "origin": "Weapon"
+          "height": 1.0,
+          "depth": 3.0,
+          "offsetX": 0,
+          "offsetY": 0,
+          "offsetZ": 1.5
         }
       ]
     }

@@ -6,9 +6,14 @@ public class ActionData
     // Para Hit
     public float damage;
     public string shape;
-    public float range;
     public float width;
-    public string origin;
+    public float height;
+    public float depth;
+
+    public float offsetX;
+    public float offsetY;
+    public float offsetZ;
+
 
     // Para VFX
     public string vfx;
