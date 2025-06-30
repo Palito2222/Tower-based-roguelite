@@ -1,0 +1,71 @@
+{
+  "id": "Kaoru_BasicSkill",
+  "type": "Basic",
+  "comboSteps": [
+    {
+      "animation": "Slash1",
+      "cooldown": 0.5,
+      "actions": [
+        {
+          "type": "PlayVFX",
+          "vfx": "Slash1"
+        },
+        {
+          "type": "Hit",
+          "timing": "OnHit1",
+          "damage": 50,
+          "shape": "Box",
+          "range": 2.0,
+          "width": 1.0,
+          "origin": "Weapon"
+        }
+      ]
+    },
+    {
+      "animation": "Kick1",
+      "cooldown": 0.0,
+      "actions": [
+        {
+          "type": "PlayVFX",
+          "vfx": "Slash1"
+        },
+        {
+          "type": "Hit",
+          "timing": "OnHit1",
+          "damage": 5,
+          "shape": "Box",
+          "range": 2.0,
+          "width": 2.0,
+          "origin": "Weapon"
+        },
+        {
+          "type": "Hit",
+          "timing": "OnHit2",
+          "damage": 5,
+          "shape": "Box",
+          "range": 2.0,
+          "width": 2.0,
+          "origin": "Weapon"
+        },
+        {
+          "type": "Hit",
+          "timing": "OnHit3",
+          "damage": 5,
+          "shape": "Box",
+          "range": 2.0,
+          "width": 2.0,
+          "origin": "Weapon"
+        },
+        {
+          "type": "Hit",
+          "timing": "OnHit4",
+          "damage": 5,
+          "shape": "Box",
+          "range": 2.0,
+          "width": 2.0,
+          "origin": "Weapon"
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -18,8 +17,19 @@ public class PlayerCombat : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         inputManager = GetComponent<InputManager>();
+        ConfigManager.ClearCache();
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private async void Start()
+    {
+        string characterName = "Kaoru";
+        string abilityScript = "Kaoru_BasicSkill";
+
+        string path = $"Assets/ArrozResources/Data/Abilities/CharacterAbility/{characterName}/{abilityScript}.json";
+        currentAbility = await ConfigManager.LoadAsync<AbilityData>(path);
     }
 
     public void LoadAbility(AbilityData ability)
@@ -33,7 +43,6 @@ public class PlayerCombat : MonoBehaviour
         if (inputManager.IsAttackPressed())
         {
             TryExecuteCombo();
-            AbilityExecutor.ExecuteActionAtTiming("OnHit1", gameObject);
         }
     }
 
@@ -43,6 +52,11 @@ public class PlayerCombat : MonoBehaviour
         {
             Debug.Log("[PlayerCombat] No hay una Abilidad seleccionada en el personaje o la habilidad está en Cooldown.");
             return;
+        }
+
+        if (comboIndex >= currentAbility.comboSteps.Count)
+        {
+            comboIndex = 0;
         }
 
         CurrentComboStep = currentAbility.comboSteps[comboIndex];

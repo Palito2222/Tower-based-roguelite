@@ -13,7 +13,7 @@ public class AbilityExecutor
 
     public static void ExecuteActionAtTiming(string timing, GameObject owner)
     {
-        var currentStep = owner.GetComponent<PlayerCombat>().CurrentComboStep;
+        var currentStep = owner.GetComponentInParent<PlayerCombat>().CurrentComboStep;
         foreach (var action in currentStep.actions)
         {
             if (action.timing == timing)
