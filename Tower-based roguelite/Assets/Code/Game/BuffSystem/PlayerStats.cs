@@ -7,9 +7,10 @@ public class PlayerStats : MonoBehaviour
     public float health = 100f;
     public float damage = 10f;
     public float speed = 5f;
+    public float jump = 1.2f;
 
     public void PrintStats()
     {
-        Debug.Log($"[Stats] Vida: {health}, Daño: {damage}, Velocidad: {speed}");
+        Debug.Log($"[Stats] Vida: {health}, Daño: {damage}, Velocidad: {speed}, Salto: {jump}");
     }
 }

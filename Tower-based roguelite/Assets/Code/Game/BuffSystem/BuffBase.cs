@@ -11,12 +11,14 @@ public class BuffBase : ScriptableObject
     public float healthBonus;
     public float damageBonus;
     public float speedBonus;
+    public float jumpBonus;
 
     public void ApplyBuff(PlayerStats stats)
     {
         stats.health += healthBonus;
         stats.damage += damageBonus;
         stats.speed += speedBonus;
+        stats.jump += jumpBonus;
     }
 }
 

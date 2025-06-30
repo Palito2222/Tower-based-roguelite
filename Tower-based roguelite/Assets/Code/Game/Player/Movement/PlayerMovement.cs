@@ -15,11 +15,13 @@ public class PlayerMovement : MonoBehaviour
     public Transform cameraTransform;
 
     private CharacterController controller;
+    private PlayerStats pStats;
     private Vector3 velocity;
     private bool isGrounded;
 
     private void Start()
     {
+        pStats = GetComponent<PlayerStats>();
         controller = GetComponent<CharacterController>();
 
         if (cameraTransform == null)
@@ -57,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
             moveDir.Normalize();
 
             // 3. Movimiento
-            float speed = InputManager.Instance.IsRunning() ? runSpeed : walkSpeed;
+            float speed = InputManager.Instance.IsRunning() ? pStats.speed : pStats.speed;
             controller.Move(moveDir * speed * Time.deltaTime);
 
             // 4. Rotación suave del personaje hacia la dirección
@@ -68,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         // 5. Salto
         if (isGrounded && InputManager.Instance.JumpTriggered())
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity.y = Mathf.Sqrt(pStats.jump * -2f * gravity);
         }
     }
 

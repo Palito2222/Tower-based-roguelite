@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b161671ec5f6ead44bf244a3bf25828f, type: 3}
   m_Name: Skibidi
   m_EditorClassIdentifier: 
-  buffName: 
-  description: 
-  healthBonus: 0
-  damageBonus: 0
+  buffName: Toilet
+  description: skbidi dop dop dop yes yes
+  healthBonus: 10
+  damageBonus: 30
   speedBonus: 0
+  jumpBonus: 0.5
