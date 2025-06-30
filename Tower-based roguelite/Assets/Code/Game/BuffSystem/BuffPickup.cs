@@ -6,6 +6,7 @@ public class BuffPickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Pito");
         BuffInventory inventory = other.GetComponent<BuffInventory>();
         if (inventory != null)
         {
