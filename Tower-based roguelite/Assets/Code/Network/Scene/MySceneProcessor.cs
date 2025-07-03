@@ -15,12 +15,11 @@ public class MySceneProcessor : SceneProcessorBase
 
     public override void BeginLoadAsync(string sceneName, LoadSceneParameters parameters)
     {
-        Debug.Log($"Iniciando carga asíncrona de la escena: {sceneName}");
         _operations.Clear();
         var operation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName, parameters);
         if (operation == null)
         {
-            Debug.LogError($"No se pudo iniciar la carga de la escena {sceneName}. Verifica que esté en Build Settings.");
+            Debug.LogError($"[MySceneProcessor] No se pudo iniciar la carga de la escena {sceneName}. Verifica que esté en Build Settings.");
             return;
         }
         operation.allowSceneActivation = true;
@@ -40,11 +39,10 @@ public class MySceneProcessor : SceneProcessorBase
         {
             while (!op.isDone)
             {
-                Debug.Log($"Progreso de carga para {op}: {op.progress * 100}%");
+                Debug.Log($"[MySceneProcessor] Progreso de carga para {op}: {op.progress * 100}%");
                 yield return null;
             }
         }
-        Debug.Log("Todas las operaciones de carga completadas.");
     }
 
     public override void ActivateLoadedScenes()
@@ -52,7 +50,6 @@ public class MySceneProcessor : SceneProcessorBase
         Scene targetScene = default;
         foreach (Scene scene in GetLoadedScenes())
         {
-            Debug.Log($"Evaluando escena: {scene.name}, isLoaded: {scene.isLoaded}, handle: {scene.handle}");
             if (scene.name == "GameRoomBase" && scene.isLoaded)
             {
                 targetScene = scene;
@@ -65,16 +62,16 @@ public class MySceneProcessor : SceneProcessorBase
             try
             {
                 UnityEngine.SceneManagement.SceneManager.SetActiveScene(targetScene);
-                Debug.Log($"Escena activada desde SceneProcessor: {targetScene.name}");
+                Debug.Log($"[MySceneProcessor] Escena activada desde SceneProcessor: {targetScene.name}");
             }
             catch (System.Exception ex)
             {
-                Debug.LogError($"Error al activar la escena {targetScene.name}: {ex.Message}");
+                Debug.LogError($"[MySceneProcessor] Error al activar la escena {targetScene.name}: {ex.Message}");
             }
         }
         else
         {
-            Debug.LogWarning("No se encontró GameRoomBase o no está cargada para activar.");
+            Debug.LogWarning("[MySceneProcessor] No se encontró GameRoomBase o no está cargada para activar.");
         }
     }
 
@@ -102,7 +99,7 @@ public class MySceneProcessor : SceneProcessorBase
     {
         if (_operations == null || _operations.Count == 0)
         {
-            Debug.LogWarning("No hay operaciones de carga en curso.");
+            Debug.LogWarning("[MySceneProcessor] No hay operaciones de carga en curso.");
             return true; // Considera la carga completa si no hay operaciones
         }
 
@@ -110,7 +107,7 @@ public class MySceneProcessor : SceneProcessorBase
         {
             if (op == null)
             {
-                Debug.LogWarning("Operación de carga nula encontrada en _operations.");
+                Debug.LogWarning("[MySceneProcessor] Operación de carga nula encontrada en _operations.");
                 continue;
             }
             if (!op.isDone)

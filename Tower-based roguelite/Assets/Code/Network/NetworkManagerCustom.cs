@@ -8,7 +8,6 @@ public class NetworkManagerCustom : MonoBehaviour
     private void Awake()
     {
         net = FindObjectOfType<NetworkManager>();
-        StartHost();
     }
 
     public void StartHost()
