@@ -69,10 +69,6 @@ public class MySceneProcessor : SceneProcessorBase
                 Debug.LogError($"[MySceneProcessor] Error al activar la escena {targetScene.name}: {ex.Message}");
             }
         }
-        else
-        {
-            Debug.LogWarning("[MySceneProcessor] No se encontró GameRoomBase o no está cargada para activar.");
-        }
     }
 
     public override List<Scene> GetLoadedScenes()

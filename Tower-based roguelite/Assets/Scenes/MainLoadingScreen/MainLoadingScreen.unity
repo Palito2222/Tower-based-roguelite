@@ -396,7 +396,9 @@ GameObject:
   m_Component:
   - component: {fileID: 272468024}
   - component: {fileID: 272468023}
+  - component: {fileID: 272468031}
   - component: {fileID: 272468027}
+  - component: {fileID: 272468030}
   - component: {fileID: 272468022}
   - component: {fileID: 272468021}
   - component: {fileID: 272468020}
@@ -614,6 +616,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed87b40cc8910641bb2391846196769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &272468030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272468017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 211a9f6ec51ddc14f908f5acc0cd0423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerPrefab: {fileID: 2486936193594459407, guid: 3eb68c70b2a6a964a91f237da837bd8c, type: 3}
+  _addToDefaultScene: 1
+  Spawns: []
+--- !u!114 &272468031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272468017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38755fa3f3eada46ad5e0c5db7f1f50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugAction:
+    m_Name: Debug
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 5bacb2cc-0846-4b53-9c8a-528485488bab
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 4a622742-7a6b-43c5-9b3c-fcbf7bf9987c
+      m_Path: <Keyboard>/f1
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Debug
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &287098716
 GameObject:
   m_ObjectHideFlags: 0

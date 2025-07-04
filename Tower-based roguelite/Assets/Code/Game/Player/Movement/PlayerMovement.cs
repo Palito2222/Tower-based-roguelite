@@ -1,3 +1,4 @@
+using Cinemachine;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -13,17 +14,24 @@ public class PlayerMovement : MonoBehaviour
 
     [Title("Camera")]
     public Transform cameraTransform;
+    public Transform cameraLookPoint;
+    public CinemachineVirtualCamera vc;
 
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
 
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        vc = GameObject.Find("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
 
         if (cameraTransform == null)
             cameraTransform = Camera.main.transform;
+
+        vc.Follow = cameraLookPoint;
+        vc.LookAt = cameraLookPoint;
     }
 
     private void Update()

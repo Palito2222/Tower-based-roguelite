@@ -15,6 +15,13 @@ public class PlayerLobbyCharacter : NetworkBehaviour
         }
     }
 
+    void Start()
+    {
+        var currentScene = gameObject.scene;
+        Debug.Log($"[Client] Estoy en la escena: {currentScene.name}, handle: {currentScene.handle}");
+    }
+
+
     Vector3 GetRandomSpawnPoint()
     {
         return new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
