@@ -1,9 +1,10 @@
 using Cinemachine;
+using FishNet.Object;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [Title("Movement")]
     public float walkSpeed = 3f;
@@ -21,9 +22,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
 
-
-    private void Start()
+    public override void OnStartClient()
     {
+        base.OnStartClient();
+
+        if (!IsOwner) return;
+
         controller = GetComponent<CharacterController>();
         vc = GameObject.Find("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
 
@@ -33,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         vc.Follow = cameraLookPoint;
         vc.LookAt = cameraLookPoint;
     }
+
 
     private void Update()
     {

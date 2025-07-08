@@ -339,7 +339,6 @@ GameObject:
   m_Component:
   - component: {fileID: 238931184}
   - component: {fileID: 238931183}
-  - component: {fileID: 238931185}
   m_Layer: 0
   m_Name: LoadingScreen
   m_TagString: Untagged
@@ -374,18 +373,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &238931185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238931182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a3f8f49ad2c3b4798a570a4bf6c3a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &272468017
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +385,6 @@ GameObject:
   - component: {fileID: 272468023}
   - component: {fileID: 272468031}
   - component: {fileID: 272468027}
-  - component: {fileID: 272468030}
   - component: {fileID: 272468022}
   - component: {fileID: 272468021}
   - component: {fileID: 272468020}
@@ -408,6 +394,8 @@ GameObject:
   - component: {fileID: 272468018}
   - component: {fileID: 272468025}
   - component: {fileID: 272468029}
+  - component: {fileID: 272468032}
+  - component: {fileID: 272468033}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -616,21 +604,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed87b40cc8910641bb2391846196769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &272468030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272468017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 211a9f6ec51ddc14f908f5acc0cd0423, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 2486936193594459407, guid: 3eb68c70b2a6a964a91f237da837bd8c, type: 3}
-  _addToDefaultScene: 1
-  Spawns: []
 --- !u!114 &272468031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,6 +633,31 @@ MonoBehaviour:
       m_Action: Debug
       m_Flags: 0
     m_Flags: 0
+--- !u!114 &272468032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272468017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d0fe020653a8f4faee551a10fa1175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 2486936193594459407, guid: 3eb68c70b2a6a964a91f237da837bd8c, type: 3}
+--- !u!114 &272468033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272468017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a3f8f49ad2c3b4798a570a4bf6c3a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &287098716
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,28 +47,24 @@ public class MySceneProcessor : SceneProcessorBase
 
     public override void ActivateLoadedScenes()
     {
-        Scene targetScene = default;
         foreach (Scene scene in GetLoadedScenes())
         {
-            if (scene.name == "GameRoomBase" && scene.isLoaded)
+            if (scene.isLoaded && scene.IsValid() && scene.name != "MovedObjectsHolder")
             {
-                targetScene = scene;
-                break;
+                try
+                {
+                    UnityEngine.SceneManagement.SceneManager.SetActiveScene(scene);
+                    Debug.Log($"[MySceneProcessor] Escena activada desde SceneProcessor: {scene.name}");
+                    return;
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError($"[MySceneProcessor] Error al activar la escena {scene.name}: {ex.Message}");
+                }
             }
         }
 
-        if (targetScene.IsValid() && targetScene.isLoaded)
-        {
-            try
-            {
-                UnityEngine.SceneManagement.SceneManager.SetActiveScene(targetScene);
-                Debug.Log($"[MySceneProcessor] Escena activada desde SceneProcessor: {targetScene.name}");
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogError($"[MySceneProcessor] Error al activar la escena {targetScene.name}: {ex.Message}");
-            }
-        }
+        Debug.LogWarning("[MySceneProcessor] No se encontró una escena válida para activar.");
     }
 
     public override List<Scene> GetLoadedScenes()

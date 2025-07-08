@@ -16,6 +16,8 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadLobbyForConnection(NetworkConnection conn)
     {
+        Debug.Log($"[SceneLoader] Cargando MasterLobby para {conn.ClientId}");
+
         string lobbySceneName = "MasterLobby";
 
         SceneLoadData sld = new SceneLoadData(lobbySceneName)
