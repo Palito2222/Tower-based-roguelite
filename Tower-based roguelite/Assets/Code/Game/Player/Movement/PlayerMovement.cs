@@ -22,6 +22,18 @@ public class PlayerMovement : NetworkBehaviour
     private Vector3 velocity;
     private bool isGrounded;
 
+    private void Start()
+    {
+        controller = GetComponent<CharacterController>();
+        vc = GameObject.Find("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
+
+        if (cameraTransform == null)
+            cameraTransform = Camera.main.transform;
+
+        vc.Follow = cameraLookPoint;
+        vc.LookAt = cameraLookPoint;
+    }
+
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -37,7 +49,6 @@ public class PlayerMovement : NetworkBehaviour
         vc.Follow = cameraLookPoint;
         vc.LookAt = cameraLookPoint;
     }
-
 
     private void Update()
     {

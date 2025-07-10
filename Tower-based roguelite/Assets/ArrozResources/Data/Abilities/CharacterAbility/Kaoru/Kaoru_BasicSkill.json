@@ -8,7 +8,12 @@
       "actions": [
         {
           "type": "PlayVFX",
-          "vfx": "Slash1"
+          "vfx": "SlashSpark",
+          "attachTo": "WeaponBone",
+          "offsetX": 0,
+          "offsetY": 0,
+          "offsetZ": 0,
+          "duration": 1.5
         },
         {
           "type": "Hit",

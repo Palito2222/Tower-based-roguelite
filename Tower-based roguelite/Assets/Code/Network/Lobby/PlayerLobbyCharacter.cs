@@ -15,12 +15,6 @@ public class PlayerLobbyCharacter : NetworkBehaviour
         }
     }
 
-    void Awake()
-    {
-        Debug.Log($"[PlayerLobbyCharacter] Awake. Parent scene: {gameObject.scene.name}");
-    }
-
-
     void Start()
     {
         var currentScene = gameObject.scene;

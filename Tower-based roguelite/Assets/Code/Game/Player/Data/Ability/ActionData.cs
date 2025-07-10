@@ -17,4 +17,6 @@ public class ActionData
 
     // Para VFX
     public string vfx;
+    public string attachTo;
+    public float duration;
 }
