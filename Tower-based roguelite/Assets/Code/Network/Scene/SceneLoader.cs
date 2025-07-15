@@ -1,8 +1,10 @@
-using FishNet.Connection;
+﻿using FishNet.Connection;
 using FishNet.Managing.Scened;
 using FishNet;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -16,23 +18,26 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadLobbyForConnection(NetworkConnection conn)
     {
-        Debug.Log($"[SceneLoader] Cargando MasterLobby para {conn.ClientId}");
+        bool already = InstanceFinder.SceneManager.SceneConnections
+                       .Any(kvp => kvp.Key.name == "MasterLobby" &&
+                                   kvp.Value.Contains(conn));
+        if (already) return;
 
-        string lobbySceneName = "MasterLobby";
-
-        SceneLoadData sld = new SceneLoadData(lobbySceneName)
+        var sld = new SceneLoadData("MasterLobby")
         {
-            ReplaceScenes = ReplaceOption.All
+            ReplaceScenes = ReplaceOption.All,
+            Options = new LoadOptions
+            {
+                AutomaticallyUnload = true,
+                AllowStacking = false,    // <— ¡DESACTIVADO!
+            }
         };
-
         InstanceFinder.SceneManager.LoadConnectionScenes(conn, sld);
     }
 
     public void LoadLobbyForGroup(List<NetworkConnection> group)
     {
-        string lobbySceneName = "MasterLobby";
-
-        SceneLoadData sld = new SceneLoadData(lobbySceneName)
+        SceneLoadData sld = new SceneLoadData("MasterLobby")
         {
             ReplaceScenes = ReplaceOption.All
         };
@@ -40,5 +45,14 @@ public class SceneLoader : MonoBehaviour
         NetworkConnection[] array = group.ToArray();
 
         InstanceFinder.SceneManager.LoadConnectionScenes(array, sld);
+    }
+
+    public static bool ConnectionHasLobby(NetworkConnection conn)
+    {
+        // ¿Existe alguna entrada cuya clave sea una escena llamada MasterLobby
+        // y cuyo Value contenga a ‘conn’?
+        return InstanceFinder.SceneManager.SceneConnections
+               .Any(kvp => kvp.Key.name == "MasterLobby" &&
+                           kvp.Value.Contains(conn));
     }
 }

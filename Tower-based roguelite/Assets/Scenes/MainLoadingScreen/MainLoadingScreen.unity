@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 6bfab16f387f95e4bb60f866299be241, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -383,19 +383,15 @@ GameObject:
   m_Component:
   - component: {fileID: 272468024}
   - component: {fileID: 272468023}
-  - component: {fileID: 272468031}
+  - component: {fileID: 272468036}
+  - component: {fileID: 272468035}
   - component: {fileID: 272468027}
   - component: {fileID: 272468022}
   - component: {fileID: 272468021}
   - component: {fileID: 272468020}
-  - component: {fileID: 272468028}
   - component: {fileID: 272468019}
-  - component: {fileID: 272468026}
-  - component: {fileID: 272468018}
+  - component: {fileID: 272468034}
   - component: {fileID: 272468025}
-  - component: {fileID: 272468029}
-  - component: {fileID: 272468032}
-  - component: {fileID: 272468033}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -403,26 +399,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &272468018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272468017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f856f22babe38646be94e1798fca165, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_key: 
-  m_appendSaverTypeToKey: 0
-  m_saveAcrossSceneChanges: 1
-  m_restoreStateOnStart: 0
-  m_spawnedObjectPrefabs: []
-  m_spawnedObjectPrefabLists: []
-  m_spawnedObjects: []
-  m_applySaveDataToSpawnedObjectsOnRestore: 1
 --- !u!114 &272468019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15895a51081447d46bda466e7e830c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneProcessor: {fileID: 272468026}
+  _sceneProcessor: {fileID: 272468034}
   _lightProbeUpdating: 0
   _moveClientObjects: 1
   _setActiveScene: 1
@@ -512,7 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c95dfde7d73b54dbbdc23155d35d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _refreshDefaultPrefabs: 0
+  _refreshDefaultPrefabs: 1
   _runInBackground: 1
   _dontDestroyOnLoad: 1
   _objectPool: {fileID: 0}
@@ -551,18 +527,6 @@ MonoBehaviour:
   _createLocalStates: 1
   _stateInterpolation: 2
   _stateOrder: 1
---- !u!114 &272468026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272468017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd33a9eda0f325f42b54d6854ce6e7c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &272468027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,7 +539,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0991c3cacaa70e4dae76a32250cf4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &272468028
+--- !u!114 &272468034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272468017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd33a9eda0f325f42b54d6854ce6e7c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &272468035
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -587,12 +563,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ce8bbb58966cb45a7140f32da5327a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableGlobalScenes: 1
+  _enableGlobalScenes: 0
   _startInOffline: 1
   _offlineScene: Assets/Scenes/MainLoadingScreen/MainLoadingScreen.unity
-  _onlineScene: 
+  _onlineScene: Assets/Scenes/MasterLobby/MasterLobby.unity
   _replaceScenes: 0
---- !u!114 &272468029
+--- !u!114 &272468036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -601,63 +577,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 272468017}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ed87b40cc8910641bb2391846196769, type: 3}
+  m_Script: {fileID: 11500000, guid: 211a9f6ec51ddc14f908f5acc0cd0423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &272468031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272468017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a38755fa3f3eada46ad5e0c5db7f1f50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugAction:
-    m_Name: Debug
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 5bacb2cc-0846-4b53-9c8a-528485488bab
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 4a622742-7a6b-43c5-9b3c-fcbf7bf9987c
-      m_Path: <Keyboard>/f1
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Debug
-      m_Flags: 0
-    m_Flags: 0
---- !u!114 &272468032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272468017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20d0fe020653a8f4faee551a10fa1175, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 2486936193594459407, guid: 3eb68c70b2a6a964a91f237da837bd8c, type: 3}
---- !u!114 &272468033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272468017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a3f8f49ad2c3b4798a570a4bf6c3a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _playerPrefab: {fileID: 2486936193594459407, guid: 3eb68c70b2a6a964a91f237da837bd8c, type: 3}
+  _addToDefaultScene: 1
+  Spawns: []
 --- !u!1 &287098716
 GameObject:
   m_ObjectHideFlags: 0

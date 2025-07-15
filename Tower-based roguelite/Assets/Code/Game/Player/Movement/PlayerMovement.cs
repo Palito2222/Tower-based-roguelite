@@ -1,6 +1,8 @@
 using Cinemachine;
+using FishNet.Connection;
 using FishNet.Object;
 using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -22,36 +24,43 @@ public class PlayerMovement : NetworkBehaviour
     private Vector3 velocity;
     private bool isGrounded;
 
-    private void Start()
-    {
-        controller = GetComponent<CharacterController>();
-        vc = GameObject.Find("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
-
-        if (cameraTransform == null)
-            cameraTransform = Camera.main.transform;
-
-        vc.Follow = cameraLookPoint;
-        vc.LookAt = cameraLookPoint;
-    }
-
     public override void OnStartClient()
     {
         base.OnStartClient();
-
         if (!IsOwner) return;
+        StartCoroutine(DelayedSetup());
+    }
+
+    private void OnClientSceneChanged(NetworkConnection conn)
+    {
+        Debug.Log($"Cliente cargó escena: {UnityEngine.SceneManagement.SceneManager.GetActiveScene().name}");
+    }
+
+    private IEnumerator DelayedSetup()
+    {
+        // Espera hasta que haya una MainCamera válida
+        while (Camera.main == null)
+            yield return null;
 
         controller = GetComponent<CharacterController>();
-        vc = GameObject.Find("PlayerCamera").GetComponent<CinemachineVirtualCamera>();
 
-        if (cameraTransform == null)
-            cameraTransform = Camera.main.transform;
+        var camGO = GameObject.Find("PlayerCamera");
+        if (camGO != null)
+            vc = camGO.GetComponent<CinemachineVirtualCamera>();
 
-        vc.Follow = cameraLookPoint;
-        vc.LookAt = cameraLookPoint;
+        cameraTransform = Camera.main.transform;
+
+        if (vc != null && cameraLookPoint != null)
+        {
+            vc.Follow = cameraLookPoint;
+            vc.LookAt = cameraLookPoint;
+        }
     }
 
     private void Update()
     {
+        if (!IsOwner) return;
+
         HandleMovement();
         ApplyGravity();
     }
